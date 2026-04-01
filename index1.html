@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Furniture Web Page</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        background-color: #f7f7f7;
+        color: #333;
+    }
+
+    h1.title {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+    }
+
+    .card {
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        padding: 15px;
+        width: 200px;
+        text-align: center;
+        cursor: pointer;
+    }
+
+    .card img {
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
+    }
+
+    .buttons {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    button {
+        margin: 5px;
+        padding: 10px 20px;
+        font-size: 16px;
+        border: none;
+        border-radius: 6px;
+        background-color: #4CAF50;
+        color: white;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    button:hover {
+        background-color: #45a049;
+    }
+
+    .home-img {
+        display: block;
+        margin: 0 auto;
+        max-width: 80%;
+        height: auto;
+    }
+
+    #home-content, #furniture-content {
+        display: none;
+    }
+
+    p {
+        line-height: 1.6;
+        margin-bottom: 15px;
+    }
+</style>
+</head>
+<body>
+
+    <!-- Landing Section -->
+    <div id="landing">
+        <img src="home.png" alt="Home Page" class="home-img">
+        <div class="buttons">
+            <button id="home">Home</button>
+            <button id="contact">Contact</button>
+            <button id="furniture">Furniture</button>
+            <button id="locate">Location</button>
+        </div>
+    </div>
+
+    <!-- Home Section -->
+    <div id="home-content">
+        <p>
+            A modern furniture showroom designed to bring comfort, style, and functionality into every home. Our collection features a wide range of high-quality furniture, including elegant sofas, comfortable beds, stylish dining sets, and practical storage solutions. Each piece is carefully crafted to combine durability with contemporary design, making it perfect for both modern and traditional interiors.
+        </p>
+        <p>
+            We believe that furniture is more than just utility—it reflects your personality and lifestyle. That’s why our showroom offers a variety of designs, colors, and materials to suit every taste and need. Whether you are furnishing a new home or upgrading your existing space, you will find pieces that perfectly match your vision.
+        </p>
+        <p>
+            Our focus is on providing not only great products but also a smooth and satisfying shopping experience. With attention to detail, affordable pricing, and customer-friendly service, we aim to help you create a space that feels truly yours. Step into our showroom and discover furniture that turns your house into a home.
+        </p>
+    </div>
+
+    <!-- Furniture Section -->
+    <div id="furniture-content">
+        <h1 class="title">Furniture Showroom</h1>
+        <div class="container">
+            <div class="card">
+                <img src="dressing table.jpeg" alt="Sofa">
+                <h3>Sofa</h3>
+                <p>₹15,000</p>
+            </div>
+            <div class="card">
+                <img src="divan caut.jpeg" alt="Bed">
+                <h3>Bed</h3>
+                <p>₹20,000</p>
+            </div>
+            <div class="card">
+                <img src="dining table.jpeg" alt="Dressing Table">
+                <h3>Dressing Table</h3>
+                <p>₹10,000</p>
+            </div>
+            <div class="card">
+                <img src="cup board.jpeg" alt="Dining Table">
+                <h3>Dining Table</h3>
+                <p>₹20,000</p>
+            </div>
+            <div class="card">
+                <img src="sofa set.jpeg" alt="Divan">
+                <h3>Divan</h3>
+                <p>₹12,000</p>
+            </div>
+            <div class="card">
+                <img src="sofa.webp" alt="Cupboard">
+                <h3>Cupboard</h3>
+                <p>₹18,000</p>
+            </div>
+        </div>
+    </div>
+
+<script>
+    // Show Home Section
+    document.getElementById("home").addEventListener("click", function() {
+        document.getElementById("landing").style.display = "none";
+        document.getElementById("furniture-content").style.display = "none";
+        document.getElementById("home-content").style.display = "block";
+    });
+
+    // Show Furniture Section
+    document.getElementById("furniture").addEventListener("click", function() {
+        document.getElementById("landing").style.display = "none";
+        document.getElementById("home-content").style.display = "none";
+        document.getElementById("furniture-content").style.display = "block";
+    });
+
+    // Contact Button Alert
+    document.getElementById("contact").addEventListener("click", function() {
+        alert("Contact us at: 9701862553");
+    });
+
+    // Location Button
+    document.getElementById("locate").addEventListener("click", function() {
+        let shoplat = 16.299335;
+        let shoplong = 80.408761;
+
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+                let userLat = position.coords.latitude;
+                let userLng = position.coords.longitude;
+                let url = `https://www.google.com/maps/dir/?api=1&origin=${userLat},${userLng}&destination=${shoplat},${shoplong}`;
+                window.open(url, "_blank");
+            }, function() {
+                alert("Location access denied or not available");
+            });
+        } else {
+            alert("Geolocation is not supported by this browser");
+        }
+    });
+
+    // Furniture cards click alert (optional)
+    const cards = document.querySelectorAll("#furniture-content .card");
+    cards.forEach(card => {
+        card.addEventListener("click", () => {
+            alert("You clicked on " + card.querySelector("h3").innerText);
+        });
+    });
+</script>
+</body>
+</html>
